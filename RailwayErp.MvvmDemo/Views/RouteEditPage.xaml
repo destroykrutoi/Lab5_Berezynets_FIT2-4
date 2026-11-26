@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RailwayErp.MvvmDemo.ViewModels"
+             x:Class="RailwayErp.MvvmDemo.Views.RouteEditPage"
+             x:DataType="vm:RouteEditViewModel"
+             Title="Маршрут">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
+    <VerticalStackLayout Padding="20" Spacing="8">
+        <Label AutomationId="HeaderLabel" Text="{Binding Header}" FontSize="20" FontAttributes="Bold" />
+        <Label Text="Назва / номер поїзда" />
+        <Entry AutomationId="NameEntry" Text="{Binding Name}" />
+        <Label Text="Станція відправлення" />
+        <Entry AutomationId="OriginEntry" Text="{Binding Origin}" />
+        <Label Text="Станція призначення" />
+        <Entry AutomationId="DestinationEntry" Text="{Binding Destination}" />
+        <Label Text="Час відправлення (ГГ:ХХ)" />
+        <Entry AutomationId="DepartureEntry" Text="{Binding Departure}" />
+        <Label Text="Номер документа начальника поїзда (шифрується)" />
+        <Entry AutomationId="DocumentEntry" Text="{Binding ChiefDocumentNumber}" />
+        <Label Text="{Binding Error}" TextColor="#C62828" />
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+            <Button AutomationId="SaveButton" Text="Зберегти" Command="{Binding SaveCommand}" />
+            <Button Grid.Column="1" AutomationId="CancelButton" Text="Скасувати" Command="{Binding CancelCommand}" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

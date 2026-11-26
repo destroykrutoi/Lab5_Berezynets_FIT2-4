@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RailwayErp.MvvmDemo.ViewModels"
+             x:Class="RailwayErp.MvvmDemo.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Title="Налаштування">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <Label Text="Тема оформлення" FontSize="18" FontAttributes="Bold" />
+            <Label AutomationId="ThemeLabel" Text="{Binding CurrentThemeText}" />
+            <Button AutomationId="LightButton" Text="Світла" Command="{Binding SetThemeCommand}" CommandParameter="Light" />
+            <Button AutomationId="DarkButton" Text="Темна" Command="{Binding SetThemeCommand}" CommandParameter="Dark" />
+            <Button AutomationId="SystemButton" Text="Як у системі" Command="{Binding SetThemeCommand}" CommandParameter="Unspecified" />
+
+            <Label Text="Діагностика" FontSize="18" FontAttributes="Bold" Margin="0,16,0,0" />
+            <Label AutomationId="CrashReportingLabel" Text="{Binding CrashReportingText}" />
+            <Button AutomationId="TaskErrorButton" Text="Виняток у фоновій задачі (Task)"
+                    Command="{Binding SimulateTaskErrorCommand}" />
+            <Button AutomationId="CrashButton" Text="Змоделювати краш застосунку"
+                    Command="{Binding SimulateCrashCommand}" BackgroundColor="#B00020" TextColor="White" />
+            <Label AutomationId="DiagnosticsMessage" Text="{Binding DiagnosticsMessage}" TextColor="Gray" />
+
+            <Label Text="Сесія" FontSize="18" FontAttributes="Bold" Margin="0,16,0,0" />
+            <Label AutomationId="SessionLabel" Text="{Binding SessionInfo}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

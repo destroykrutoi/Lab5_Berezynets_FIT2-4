@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RailwayErp.MvvmDemo.ViewModels"
+             xmlns:s="clr-namespace:RailwayErp.MvvmDemo.Services"
+             x:Class="RailwayErp.MvvmDemo.Views.LogPage"
+             x:DataType="vm:LogViewModel"
+             Title="Логи">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="16" RowSpacing="8">
+        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+            <Picker AutomationId="LevelPicker" Title="Рівень"
+                    ItemsSource="{Binding LevelOptions}"
+                    SelectedIndex="{Binding SelectedLevelIndex}" />
+            <Picker Grid.Column="1" AutomationId="CountPicker" Title="N записів" WidthRequest="110"
+                    ItemsSource="{Binding CountOptions}"
+                    SelectedItem="{Binding SelectedCount}" />
+            <Button Grid.Column="2" AutomationId="RefreshButton" Text="Оновити"
+                    Command="{Binding RefreshCommand}" VerticalOptions="End" />
+        </Grid>
+
+        <Label Grid.Row="1" AutomationId="LogSummary" Text="{Binding Summary}" TextColor="Gray" FontSize="13" />
+
+        <CollectionView Grid.Row="2" AutomationId="LogList" ItemsSource="{Binding Entries}">
+            <CollectionView.EmptyView>
+                <Label Text="Записів із таким рівнем немає" TextColor="Gray" Margin="0,8" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="s:LogRecord">
+                    <Grid ColumnDefinitions="4,*" ColumnSpacing="8" Padding="0,4">
+                        <BoxView Color="{Binding LevelColor}" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="1">
+                            <Label Text="{Binding Header}" TextColor="{Binding LevelColor}"
+                                   FontSize="12" FontAttributes="Bold" />
+                            <Label Text="{Binding Message}" FontSize="13" LineBreakMode="WordWrap" />
+                            <Label Text="{Binding ExceptionShort}" IsVisible="{Binding HasException}"
+                                   FontSize="11" TextColor="{Binding LevelColor}"
+                                   LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="3" Spacing="4">
+            <Button AutomationId="ReportButton" Text="Повідомити про помилку"
+                    Command="{Binding ReportCommand}" />
+            <Label AutomationId="ReportStatus" Text="{Binding ReportStatus}" TextColor="Gray" FontSize="13" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

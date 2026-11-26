@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RailwayErp.MvvmDemo.ViewModels"
+             x:Class="RailwayErp.MvvmDemo.Views.DatabasePage"
+             x:DataType="vm:DatabaseViewModel"
+             Title="База даних">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="6">
+            <Label AutomationId="DbSummary" Text="{Binding Summary}" FontAttributes="Bold" />
+            <Label Text="Таблиця TrainRoute (вміст у файлі БД)" FontSize="16" FontAttributes="Bold" Margin="0,8,0,0" />
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding RouteRows}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Label Text="{Binding .}" FontSize="12" Margin="0,3" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+            <Label Text="Таблиця SyncQueue" FontSize="16" FontAttributes="Bold" Margin="0,8,0,0" />
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding QueueRows}">
+                <BindableLayout.EmptyView>
+                    <Label Text="Черга порожня" TextColor="Gray" />
+                </BindableLayout.EmptyView>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Label Text="{Binding .}" FontSize="12" Margin="0,3" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
